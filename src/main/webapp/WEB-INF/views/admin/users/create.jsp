@@ -5,11 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/bootstrap.min.css"></link>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
 	  <a class="navbar-brand" href="#">Navbar</a>
 	
 	  <div class="collapse navbar-collapse">

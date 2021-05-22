@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.it15306.models.User;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -48,8 +50,24 @@ public class UserController {
 	}
 
 	@GetMapping(value="/edit/{id}")
-	public String edit(@PathVariable("id") Integer id)
-	{
+	public String edit(
+		@PathVariable("id") Integer id,
+		Model model
+	) {
+		// fake data
+		User user = new User();
+		
+		user.setMaSV("PH12321");
+		user.setHoTen("Nguyen Van A");
+		user.setEmail("anvph12345@fpt.edu.vn");
+		user.setPassword("123456");
+		user.setGioiTinh(1);
+		user.setAvatar(null);
+		user.setChuyenNganh("UDPM");
+		user.setPhanQuyen(1);
+		
+		model.addAttribute("user", user);
+		
 		return "admin/users/edit";
 	}
 
