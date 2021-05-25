@@ -38,16 +38,17 @@
 			<div class="form-group mt-3">
 				<label for="name">Name</label>
 				<form:input path="hoTen" cssClass="form-control" />
-			    <%-- <input value="${ user.name }" type="text" class="form-control" id="name" name="name" autocomplete="off"> --%>
-			    <small id="name_error" class="form-text text-danger"></small>
+			    <form:errors path="hoTen" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="email">Email</label>
 				<form:input path="email" cssClass="form-control" />
+				<form:errors path="email" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="password">Password</label>
 				<form:password path="password" cssClass="form-control" />
+				<form:errors path="password" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="dob">Date of Birth</label>
@@ -61,6 +62,7 @@
 					<form:option value="3">PDT</form:option>
 					<form:option value="4">CNBM</form:option>
 				</form:select>
+				<form:errors path="phanQuyen" element="span" cssClass="text-danger" />
 				<%-- <select name="role" id="role" class="form-control" required>
 					<option selected disabled>Choose</option>
 					<option value="1" ${ user.role == 1 ? "selected" : "" }>User</option>
@@ -77,6 +79,7 @@
 					<form:option value="0">Nữ</form:option>
 					<form:option value="1">Nam</form:option>
 				</form:select>
+				<form:errors path="gioiTinh" element="span" cssClass="text-danger" />
 				<%-- <select name="gender" id="gender" class="form-control" required>
 					<option selected disabled>Choose</option>
 					<option value="1" ${ user.gender == 1 ? "selected" : "" }>Male</option>
