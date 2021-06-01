@@ -8,5 +8,10 @@
 </head>
 <body>
 	<h1>Hello Poly</h1>
+	<form method="POST" enctype="multipart/form-data"
+		action="${ pageContext.request.contextPath }/hello-upload">
+		<input type="file" name="uploadedFile" />
+		<button>Submit</button>
+	</form>
 </body>
 </html>
