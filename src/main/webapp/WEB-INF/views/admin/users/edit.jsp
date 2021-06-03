@@ -36,9 +36,9 @@
 			action="${ pageContext.request.contextPath }/users/update/1">
 			<input type="hidden" name="_method" value="put" />
 			<div class="form-group mt-3">
-				<label for="name">Name</label>
-				<form:input path="hoTen" cssClass="form-control" />
-			    <form:errors path="hoTen" element="span" cssClass="text-danger" />
+				<label for="username">Name</label>
+				<form:input path="username" cssClass="form-control" />
+			    <form:errors path="username" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="email">Email</label>
@@ -51,18 +51,12 @@
 				<form:errors path="password" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
-				<label for="dob">Date of Birth</label>
-			    <input type="text" class="form-control" id="dob" name="dob" autocomplete="off">
-			</div>
-			<div class="form-group mt-3">
-				<label for="role">Role</label>
-				<form:select path="phanQuyen" cssClass="form-control">
-					<form:option value="1">Sinh Vien</form:option>
-					<form:option value="2">Giang Vien</form:option>
-					<form:option value="3">PDT</form:option>
-					<form:option value="4">CNBM</form:option>
+				<label for="admin">Role</label>
+				<form:select path="admin" cssClass="form-control">
+					<form:option value="1">Admin</form:option>
+					<form:option value="0">Member</form:option>
 				</form:select>
-				<form:errors path="phanQuyen" element="span" cssClass="text-danger" />
+				<form:errors path="admin" element="span" cssClass="text-danger" />
 				<%-- <select name="role" id="role" class="form-control" required>
 					<option selected disabled>Choose</option>
 					<option value="1" ${ user.role == 1 ? "selected" : "" }>User</option>
@@ -70,30 +64,17 @@
 				</select> --%>
 			</div>
 			<div class="form-group mt-3">
-				<label for="avatar">Image</label>
-			    <input type="file" value="${ user.avatar }" class="form-control" id="avatar" name="avatar">
+				<label for="photo">Image</label>
+			    <input type="file" value="${ user.photo }" class="form-control" id="photo" name="photo">
 			</div>
 			<div class="form-group mt-3">
-				<label for="gender">Gender</label>
-				<form:select path="gioiTinh" cssClass="form-control">
-					<form:option value="0">Nữ</form:option>
-					<form:option value="1">Nam</form:option>
-				</form:select>
-				<form:errors path="gioiTinh" element="span" cssClass="text-danger" />
-				<%-- <select name="gender" id="gender" class="form-control" required>
+				<label for="activated">Trạng thái</label>
+				<select name="activated" id="activated" class="form-control" required>
 					<option selected disabled>Choose</option>
-					<option value="1" ${ user.gender == 1 ? "selected" : "" }>Male</option>
-					<option value="2" ${ user.gender == 2 ? "selected" : "" }>Female</option>
-				</select> --%>
-			</div>
-			<%-- <div class="form-group mt-3">
-				<label for="status">Status</label>
-				<select name="status" id="status" class="form-control" required>
-					<option selected disabled>Choose</option>
-					<option value="1" ${ user.status == 1 ? "selected" : "" }>Active</option>
-					<option value="2" ${ user.status == 2 ? "selected" : "" }>Inactive</option>
+					<option value="1" ${ user.activated == 1 ? "selected" : "" }>Đang hoạt động</option>
+					<option value="0" ${ user.activated == 0 ? "selected" : "" }>Vô hiệu hóa</option>
 				</select>
-			</div> --%>
+			</div>
 			<div class="form-group mt-3">
 				<button class="btn btn-primary">Submit</button>
 				<button type="reset" class="btn btn-danger">Clear</button>

@@ -21,14 +21,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it15306.dto.User;
+import com.it15306.repositories.UserRepository;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
+	@Autowired
+	private UserRepository userRepo;
+
 	@GetMapping(value="/")
 	public String index(Model model)
 	{
-//		model.addAttribute("message", "Ko Học Lại");
+		List<com.it15306.entity.User> listUser = this.userRepo.findAll();
+		model.addAttribute("listUser", listUser);
 		return "admin/users/index";
 	}
 
@@ -58,19 +63,19 @@ public class UserController {
 		@PathVariable("id") Integer id,
 		Model model
 	) {
-		// fake data
-		User user = new User();
+		com.it15306.entity.User entity = this.userRepo.getOne(id);
+		User userDTO = new User();
 		
-		user.setMaSV("PH12321");
-		user.setHoTen("Nguyen Van A");
-		user.setEmail("anvph12345@fpt.edu.vn");
-		user.setPassword("123456");
-		user.setGioiTinh(1);
-		user.setAvatar(null);
-		user.setChuyenNganh("UDPM");
-		user.setPhanQuyen(1);
+		// ModelMapper
+		// https://mvnrepository.com/artifact/org.modelmapper/modelmapper/2.4.4
+		userDTO.setUsername(entity.getUsername());
+		userDTO.setEmail(entity.getEmail());
+		userDTO.setPassword(entity.getPassword());
+		userDTO.setPhoto(entity.getPhoto());
+		userDTO.setActivated(entity.getActivated());
+		userDTO.setAdmin(entity.getAdmin());
 		
-		model.addAttribute("user", user);
+		model.addAttribute("user", userDTO);
 		
 		return "admin/users/edit";
 	}

@@ -12,7 +12,7 @@ public class DemoMultiBeanConfiguration {
 	public User getUser1()
 	{
 		User myUser = new User();
-		myUser.setHoTen("TienNH21");
+//		myUser.setHoTen("TienNH21");
 		return myUser;
 	}
 
@@ -20,7 +20,7 @@ public class DemoMultiBeanConfiguration {
 	public User getUser2()
 	{
 		User myUser = new User();
-		myUser.setHoTen("DungNA29");
+//		myUser.setHoTen("DungNA29");
 		return myUser;
 	}
 }

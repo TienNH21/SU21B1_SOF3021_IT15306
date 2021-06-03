@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <title>Insert title here</title>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/bootstrap.min.css"></link>
 </head>
@@ -36,31 +37,35 @@
 					<tr>
 						<td>Id</td>
 						<td>Họ tên</td>
-						<td>Mã SV</td>
+						<td>Email</td>
 						<td>Avatar</td>
-						<td>Chuyên ngành</td>
+						<td>Trạng thái</td>
+						<td>Phân quyền</td>
 						<td colspan="2">Thao tác</td>
 					</tr>
 				</thead>
 				
 				<tbody>
+					<c:forEach items="${ listUser }" var="user">
 					<tr>
-						<td>1</td>
-						<td>Nguyễn Văn A</td>
-						<td>PH12345</td>
-						<td>Ko có</td>
-						<td>UDPM</td>
+						<td>${ user.id }</td>
+						<td>${ user.username }</td>
+						<td>${ user.email }</td>
+						<td>${ user.photo }</td>
+						<td>${ user.activated == 1 ? "Đang hoạt động" : "Vô hiệu hóa" }</td>
+						<td>${ user.admin == 1 ? "Admin" : "Member" }</td>
 						<td>
 							<a
 								class="btn btn-primary"
-								href="${ pageContext.request.contextPath }/users/edit/1">Update</a>
+								href="${ pageContext.request.contextPath }/users/edit/${ user.id }">Update</a>
 						</td>
 						<td>
-							<form action="${ pageContext.request.contextPath }/users/delete/1" method="POST">
+							<form action="${ pageContext.request.contextPath }/users/delete/${ user.id }" method="POST">
 								<button class="btn btn-danger">Delete</button>
 							</form>
 						</td>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

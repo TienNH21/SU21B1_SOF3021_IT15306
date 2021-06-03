@@ -17,7 +17,7 @@ import lombok.Setter;
 public class User {
 	@NotNull(message="Họ Tên không được để trống")
 	@NotBlank
-	private String hoTen;
+	private String username;
 
 	@NotNull
 	@NotBlank
@@ -28,20 +28,12 @@ public class User {
 	@NotBlank
 	private String password;
 
-	@NotNull
-	@NotBlank
-	private String maSV;
-
 	@Null
-	private String avatar;
+	private String photo;
 
 	@NotNull
-	@NotBlank
-	private String chuyenNganh;
+	private Integer admin;
 
 	@NotNull
-	private Integer gioiTinh;
-
-	@NotNull
-	private Integer phanQuyen;
+	private Integer activated;
 }
