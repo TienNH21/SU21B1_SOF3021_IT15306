@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class UserDTO {
 	@NotNull(message="Họ Tên không được để trống")
 	@NotBlank
 	private String username;

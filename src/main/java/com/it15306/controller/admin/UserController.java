@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.it15306.dto.User;
+import com.it15306.dto.UserDTO;
+import com.it15306.entity.User;
+import com.it15306.mappers.UserMapper;
 import com.it15306.repositories.UserRepository;
 
 @Controller
@@ -28,6 +30,9 @@ import com.it15306.repositories.UserRepository;
 public class UserController {
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private UserMapper mapper;
 
 	@GetMapping(value="/")
 	public String index(Model model)
@@ -39,9 +44,11 @@ public class UserController {
 
 	@GetMapping(value="/{id}")
 	public String show(
-		@PathVariable(name="id") Integer id
+		Model model,
+		@PathVariable(name="id") User entity
 	) {
-		System.out.println("----" + id);
+		UserDTO userDTO = mapper.convertToDTO(entity);		
+		model.addAttribute("user", userDTO);
 		return "";
 	}
 
@@ -52,29 +59,23 @@ public class UserController {
 	}
 	
 	@PostMapping(value="/store")
-	public String store()
-	{
-		// Xử lý ...
+	public String store(
+		Model model,
+		@Valid UserDTO user,
+		BindingResult result
+	) {
+		// kiểm tra lỗi
+		User entity = mapper.convertToEntity(user);
+		this.userRepo.save(entity);
 		return "redirect:/users/";
 	}
 
 	@GetMapping(value="/edit/{id}")
 	public String edit(
-		@PathVariable("id") Integer id,
+		@PathVariable("id") User entity,
 		Model model
 	) {
-		com.it15306.entity.User entity = this.userRepo.getOne(id);
-		User userDTO = new User();
-		
-		// ModelMapper
-		// https://mvnrepository.com/artifact/org.modelmapper/modelmapper/2.4.4
-		userDTO.setUsername(entity.getUsername());
-		userDTO.setEmail(entity.getEmail());
-		userDTO.setPassword(entity.getPassword());
-		userDTO.setPhoto(entity.getPhoto());
-		userDTO.setActivated(entity.getActivated());
-		userDTO.setAdmin(entity.getAdmin());
-		
+		UserDTO userDTO = mapper.convertToDTO(entity);		
 		model.addAttribute("user", userDTO);
 		
 		return "admin/users/edit";
@@ -83,7 +84,7 @@ public class UserController {
 	@PostMapping(value="/update/{id}")
 	public String update(
 		Model model,
-		@Valid User user,
+		@Valid UserDTO user,
 		BindingResult result
 	) {
 		if ( result.hasErrors() ) {
@@ -95,15 +96,16 @@ public class UserController {
 //			return "redirect:/users/edit/1";
 			return "admin/users/edit";
 		} else {
-			System.out.println("false");
+			User entity = mapper.convertToEntity(user);
+			this.userRepo.save(entity);
 			return "redirect:/users/";
 		}
 	}
 
 	@PostMapping(value="/delete/{id}")
-	public String delete(@PathVariable("id") Integer id)
+	public String delete(@PathVariable("id") User entity)
 	{
-		// Xử lý ...
+		this.userRepo.delete(entity);
 		return "redirect:/users/";
 	}
 }

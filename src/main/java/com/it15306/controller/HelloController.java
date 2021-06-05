@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.it15306.dto.User;
+import com.it15306.dto.UserDTO;
 
 @Controller
 public class HelloController {
 	@Autowired
 	@Qualifier("beanDungNA29")
-	private User user;
+	private UserDTO user;
 
 	@Autowired
 	private ServletContext app;
