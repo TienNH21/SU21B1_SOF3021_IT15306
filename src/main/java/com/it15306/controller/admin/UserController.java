@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.it15306.dto.UserDTO;
 import com.it15306.entity.User;
+import com.it15306.libs.HashUtil;
 import com.it15306.mappers.UserMapper;
 import com.it15306.repositories.UserRepository;
 
@@ -66,6 +67,10 @@ public class UserController {
 	) {
 		// kiểm tra lỗi
 		User entity = mapper.convertToEntity(user);
+		
+		String hashedPwd = HashUtil.hash(user.getPassword());
+		entity.setPassword(hashedPwd);
+
 		this.userRepo.save(entity);
 		return "redirect:/users/";
 	}
@@ -97,6 +102,7 @@ public class UserController {
 			return "admin/users/edit";
 		} else {
 			User entity = mapper.convertToEntity(user);
+
 			this.userRepo.save(entity);
 			return "redirect:/users/";
 		}
