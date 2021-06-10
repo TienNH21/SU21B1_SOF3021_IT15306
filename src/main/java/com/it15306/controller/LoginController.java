@@ -35,14 +35,18 @@ public class LoginController {
 		@RequestParam("password") String password
 	) {
 		User entity = this.userRepo.findByEmail(email);
+		boolean checkPwd = false;
 		
-		boolean checkPwd = HashUtil.verify(password, entity.getPassword());
-		if (!checkPwd) {
-			request.getSession().setAttribute("error", "Sai email hoặc password");
+		if (entity != null) {
+			checkPwd = HashUtil.verify(password, entity.getPassword());
+		}
+		
+		if (entity == null || !checkPwd) {
+			request.getSession().setAttribute("errorMessage", "Sai email hoặc password");
 			return "redirect:/login";
 		}
 
-		// Lưu user vào session
+		request.getSession().setAttribute("user", entity);
 		return "redirect:/users/";
 	}
 }

@@ -27,7 +27,7 @@ import com.it15306.mappers.UserMapper;
 import com.it15306.repositories.UserRepository;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/admin/users")
 public class UserController {
 	@Autowired
 	private UserRepository userRepo;
@@ -72,7 +72,7 @@ public class UserController {
 		entity.setPassword(hashedPwd);
 
 		this.userRepo.save(entity);
-		return "redirect:/users/";
+		return "redirect:/admin/users/";
 	}
 
 	@GetMapping(value="/edit/{id}")
@@ -104,7 +104,7 @@ public class UserController {
 			User entity = mapper.convertToEntity(user);
 
 			this.userRepo.save(entity);
-			return "redirect:/users/";
+			return "redirect:/admin/users/";
 		}
 	}
 
@@ -112,6 +112,6 @@ public class UserController {
 	public String delete(@PathVariable("id") User entity)
 	{
 		this.userRepo.delete(entity);
-		return "redirect:/users/";
+		return "redirect:/admin/users/";
 	}
 }
